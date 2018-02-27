@@ -1,0 +1,60 @@
+body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee;
+    height: 100vh;
+    color: #666;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+main {
+    position: relative;
+    height: 800px;
+    width: 800px;
+}
+
+$size: 0.92;
+$offset: (1 - $size) / 2;
+
+.el {
+    cursor: pointer;
+    position: absolute;
+    // top: percentage($offset);
+    // left: percentage($offset);
+    height: percentage($size);
+    width: percentage($size);
+    transition: background 300ms ease-in;
+    background: rgba(0, 90, 200, 0.03);
+
+    &:hover {
+        & > .count {
+            color: #333;
+        }
+
+        &:after {
+            z-index: -1;
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            height: 100%;
+            width: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.4);
+        }
+    }
+}
+
+.event {
+    transition: background 100ms ease-in;
+    background: salmon;
+}
+
+.count {
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    font-size: $size + em;
+    text-align: right;
+}

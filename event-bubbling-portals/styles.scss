@@ -1,0 +1,41 @@
+body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee;
+    height: 100vh;
+    color: #666;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+$size: 20%;
+
+.el {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: $size;
+    width: $size;
+    transition: background 300ms ease-in;
+    background: rgba(0, 90, 200, 0.05);
+
+    &:hover {
+        &:after {
+            z-index: -1;
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            height: 100%;
+            width: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.4);
+        }
+    }
+}
+
+.event {
+    background: salmon;
+}
