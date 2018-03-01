@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Chat = ({ comments }) => (
-    <div className="chat">
-        {comments.map(comment => (
-            <p
-                className={`comment ${
-                    comment.author === 'me' ? ' me' : ' bot'
-                }`}
-            >
-                {comment.text}
-            </p>
-        ))}
-    </div>
-);
+export default class Chat extends Component {
+    componentDidUpdate() {
+        this.chat.scrollTop = this.chat.scrollHeight;
+        // debugger;
+    }
 
-export default Chat;
+    render() {
+        const { comments } = this.props;
+        return (
+            <div className="chat" ref={ref => (this.chat = ref)}>
+                {comments.map(comment => (
+                    <div
+                        className={`comment-container  ${
+                            comment.author === 'me' ? 'me' : 'bot'
+                        }`}
+                    >
+                        <p className={`comment`}>{comment.text}</p>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+}
