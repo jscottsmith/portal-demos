@@ -10,7 +10,7 @@ body {
 body {
     position: relative;
     color: #666;
-    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -30,8 +30,11 @@ main {
     background: #f3f3f3;
     overflow: hidden;
     border-radius: 8px;
+    // border-top-right-radius: 8px;
+    // border-top-left-radius: 8px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    min-height: 300px;
+
+    resize: both;
 
     h2 {
         margin: 0;
@@ -61,10 +64,8 @@ textarea {
     display: block;
     padding: 10px;
     width: 100%;
-    height: auto;
-    max-height: 54px;
-    max-width: 100%;
-    min-width: 100%;
+    height: 54px;
+    resize: none;
 
     background-color: rgba(255, 255, 255, 0.9);
     color: #666;
@@ -73,6 +74,11 @@ textarea {
     line-height: 1.6;
     border: none;
     outline: none;
+
+    &:focus {
+        // box-shadow: inset 0 2px 5px rgba(#42b6f4, 0.5);
+        border-right: solid 4px #42b6f4;
+    }
 }
 
 button {
@@ -82,7 +88,7 @@ button {
 }
 
 .emoji-menu {
-    max-height: (32 * 4 - 10) + px;
+    max-height: (36 * 5 - 10) + px;
     overflow: scroll;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.9);
@@ -107,23 +113,35 @@ button {
 }
 
 .chat {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     overflow: scroll;
     padding: 10px 20px 60px 20px;
+    min-height: 500px;
+    min-width: 400px;
 }
 
-.comment-container {
+.comment {
     position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-end;
     margin: 10px 0;
 
-    .comment {
+    .avatar {
         display: inline-block;
-        margin: 0;
-        padding: 16px;
+        margin-right: 16px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: #fff;
+        text-align: center;
+        line-height: 36px;
+    }
+
+    .bubble {
+        position: relative;
+        display: inline-block;
+        margin: 0 0 10px 0;
+        padding: 14px;
 
         border-radius: 24px;
         max-width: 75%;
@@ -142,8 +160,15 @@ button {
     }
 
     &.me {
-        text-align: right;
-        .comment {
+        justify-content: flex-end;
+
+        .avatar {
+            order: 1;
+            margin-right: 0;
+            margin-left: 16px;
+        }
+
+        .bubble {
             text-align-last: auto;
             background-color: #42b6f4;
             color: #fff;
@@ -158,7 +183,7 @@ button {
     }
 
     &.bot {
-        .comment {
+        .bubble {
             background-color: #e3e3e3;
             border-bottom-left-radius: 0;
 

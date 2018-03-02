@@ -12,16 +12,17 @@ export default class TextInput extends Component {
             emojis: [],
         };
         // capture and words after the : at the end
-        this.regex = new RegExp(/(:\b)\w+$/);
+        this.emojiAutoComplete = new RegExp(/(:\b)\w+$/);
+        this.emojiTest = new RegExp(/(:\b:)\w/);
     }
 
     handleChange = event => {
         const { value } = event.currentTarget;
 
-        if (this.regex.test(value)) {
+        if (this.emojiAutoComplete.test(value)) {
             // create regex based on expected shortname value
             const searchName = value.split(':').slice(-1)[0];
-            const regex = new RegExp(`(${searchName})`);
+            const regex = new RegExp(`^:${searchName}`);
 
             // filter emojis by shortnames
             const matchingEmojis = emojis.filter(({ shortname }) =>
@@ -34,6 +35,7 @@ export default class TextInput extends Component {
                 searchName,
             });
         } else {
+            if ()
             this.setState({
                 emojis: [],
                 value,
@@ -53,12 +55,18 @@ export default class TextInput extends Component {
     };
 
     handleKeyDown = event => {
+        const { emojis, value } = this.state;
+
+        // select an emoji on tab
         const { keyCode } = event;
-        if (keyCode === 9) {
+        if (keyCode === 9 && emojis[0]) {
             event.preventDefault();
             this.handleSelect(this.state.emojis[0].emoji);
         }
-        if (keyCode === 13) {
+
+        // submit message on enter
+        const trimVal = value.replace('\n', '').trim();
+        if (keyCode === 13 && trimVal) {
             event.preventDefault();
             this.handleSubmit();
         }
