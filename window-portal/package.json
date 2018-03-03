@@ -1,5 +1,5 @@
 {
-  "name": "react-event-bubbling",
+  "name": "window-portal",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,11 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
