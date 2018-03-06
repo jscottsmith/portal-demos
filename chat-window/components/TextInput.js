@@ -11,18 +11,19 @@ export default class TextInput extends Component {
             value: '',
             emojis: [],
         };
-        // capture and words after the : at the end
+        // capture potential emoji shortcodes
         this.emojiAutoComplete = new RegExp(/(:\b)\w+$/);
-        this.emojiTest = new RegExp(/(:\b:)\w/);
+        // capture all potential completed emoji shortcodes
+        this.emojiTest = new RegExp(/\:(.*?)\:/g);
     }
 
     handleChange = event => {
-        const { value } = event.currentTarget;
+        let { value } = event.currentTarget;
 
         if (this.emojiAutoComplete.test(value)) {
             // create regex based on expected shortname value
-            const searchName = value.split(':').slice(-1)[0];
-            const regex = new RegExp(`^:${searchName}`);
+            const potentialShortname = value.split(':').slice(-1)[0];
+            const regex = new RegExp(`^:${potentialShortname}`);
 
             // filter emojis by shortnames
             const matchingEmojis = emojis.filter(({ shortname }) =>
@@ -32,10 +33,9 @@ export default class TextInput extends Component {
             this.setState({
                 emojis: matchingEmojis,
                 value,
-                searchName,
+                potentialShortname,
             });
         } else {
-            if ()
             this.setState({
                 emojis: [],
                 value,
@@ -44,12 +44,12 @@ export default class TextInput extends Component {
     };
 
     handleSelect = emoji => {
-        const { value, searchName } = this.state;
-        const nextValue = value.split(`:${searchName}`).join(emoji);
+        const { value, potentialShortname } = this.state;
+        const nextValue = value.split(`:${potentialShortname}`).join(emoji);
         this.setState({
             value: nextValue,
             emojis: [],
-            searchName: null,
+            potentialShortname: null,
         });
         this.textarea.focus();
     };
@@ -73,12 +73,40 @@ export default class TextInput extends Component {
     };
 
     handleSubmit() {
-        this.props.handleSubmit(this.state.value);
+        const value = this.replaceEmojiShortcodes(this.state.value);
+        this.props.handleSubmit(value);
         this.setState({
             value: '',
             emojis: [],
-            searchName: null,
+            potentialShortname: null,
         });
+    }
+
+    replaceEmojiShortcodes(value) {
+        // test for potential emoji shortnames
+        if (this.emojiTest.test(value)) {
+            // filter down to only emoji shortname matches
+            const matches = value
+                .match(this.emojiTest)
+                .map(val => {
+                    // filter to only emoji matches
+                    const emoji = emojis.filter(
+                        emoji => emoji.shortname === val
+                    );
+
+                    // return the emoji obj
+                    return emoji[0];
+                })
+                .filter(v => v); // filter out undefined
+
+            // reduce value to replace emoji shortnames with emoji char
+            if (matches.length) {
+                value = matches.reduce((acc, cur) => {
+                    return acc.replace(cur.shortname, cur.emoji);
+                }, value);
+            }
+        }
+        return value;
     }
 
     render() {

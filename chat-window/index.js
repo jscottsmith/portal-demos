@@ -56,18 +56,16 @@ export class App extends Component {
     render() {
         return (
             <main>
-                <Card>
+                <article className="card">
                     {/* this will be our portal element */}
                     <header ref={ref => (this.header = ref)} />
-
                     <Chat comments={this.state.comments} />
-
                     <TextInput
                         handleSubmit={this.handleSubmit}
                         // this will allow us to retrieve the ref for creating the portal
                         getRef={() => this.header}
                     />
-                </Card>
+                </article>
             </main>
         );
     }
