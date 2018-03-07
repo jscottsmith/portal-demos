@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 import ReactDOM from 'react-dom';
-import Card from './components/Card';
 import TextInput from './components/TextInput';
 import Chat from './components/Chat';
+
 import responses from './data/responses';
 
-export class App extends Component {
+class App extends React.Component {
     state = {
         comments: [
             {
@@ -18,14 +18,7 @@ export class App extends Component {
     };
 
     handleSubmit = text => {
-        const comments = [
-            ...this.state.comments,
-            {
-                author: 'me',
-                text,
-            },
-        ];
-        this.setState({ comments });
+        this.addComment('me', text);
         this.startBotResponse();
     };
 
@@ -43,29 +36,36 @@ export class App extends Component {
     fakeResponse = () => {
         const i = Math.floor(Math.random() * (responses.length - 1));
         const response = responses[i];
+        this.addComment('bot', response);
+    };
+
+    addComment(author, text) {
         const comments = [
             ...this.state.comments,
             {
-                author: 'bot',
-                text: response,
+                author,
+                text,
             },
         ];
         this.setState({ comments });
-    };
+    }
 
     render() {
         return (
             <main>
-                <article className="card">
+                <section className="chat-window">
                     {/* this will be our portal element */}
                     <header ref={ref => (this.header = ref)} />
+
+                    {/* the message window */}
                     <Chat comments={this.state.comments} />
+
+                    {/* the meat of this app is within the TextInput */}
                     <TextInput
                         handleSubmit={this.handleSubmit}
-                        // this will allow us to retrieve the ref for creating the portal
-                        getRef={() => this.header}
+                        getRef={() => this.header} // this will allow us to retrieve the ref for creating the portal
                     />
-                </article>
+                </section>
             </main>
         );
     }

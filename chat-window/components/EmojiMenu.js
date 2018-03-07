@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 
 const EmojiMenu = ({ emojis, handleSelect }) => (
-    <nav className="emoji-menu">
+    <ul className="emoji-menu">
         {emojis.map(({ emoji }, i) => (
-            <button
-                onClick={() => {
-                    handleSelect(emoji);
-                }}
-                key={i}
-            >
-                {emoji}
-            </button>
+            <li key={i}>
+                <button onClick={() => handleSelect(emoji)}>{emoji}</button>
+            </li>
         ))}
-    </nav>
+    </ul>
 );
 
 export default EmojiMenu;

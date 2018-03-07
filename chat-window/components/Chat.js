@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Chat extends Component {
+class Chat extends React.Component {
     componentDidUpdate() {
         this.chat.scrollTop = this.chat.scrollHeight;
     }
@@ -26,3 +26,5 @@ export default class Chat extends Component {
         );
     }
 }
+
+export default Chat;

@@ -1,8 +1,3 @@
-html,
-body {
-    min-height: 100%;
-}
-
 * {
     box-sizing: border-box;
 }
@@ -17,12 +12,13 @@ body {
 main {
     padding: 16px;
     display: flex;
+    height: 100vh;
     flex-flow: row wrap;
-    align-content: center;
+    align-items: center;
     justify-content: center;
 }
 
-.card {
+.chat-window {
     display: flex;
     position: relative;
     margin: 16px;
@@ -60,7 +56,7 @@ textarea {
     display: block;
     padding: 10px;
     width: 100%;
-    height: 54px;
+    height: 58px;
     resize: none;
 
     background-color: rgba(255, 255, 255, 0.9);
@@ -81,9 +77,14 @@ button {
 .emoji-menu {
     max-height: (36 * 5 - 10) + px;
     overflow: scroll;
+    margin: 0;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+
+    li {
+        display: inline-block;
+    }
 
     button {
         padding: 0;
