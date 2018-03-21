@@ -1,11 +1,11 @@
 import 'babel-polyfill';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import OpenPortal from './components/OpenPortal';
+import Message from './components/Message';
 
 const App = () => (
     <main>
-        <OpenPortal />
+        <Message />
     </main>
 );
 
