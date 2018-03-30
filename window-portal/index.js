@@ -1,11 +1,11 @@
 import 'babel-polyfill';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import Message from './components/Message';
+import Messenger from './components/Messenger';
 
 const App = () => (
     <main>
-        <Message />
+        <Messenger />
     </main>
 );
 
