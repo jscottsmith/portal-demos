@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
 
-const Input = ({ label, value, onChange }) => (
+const Input = ({ tag: Tag = 'input', label, value, onChange, ...rest }) => (
     <Fragment>
         <label>{label}</label>
-        <input
+        <Tag
             onChange={({ currentTarget: { value } }) => {
                 onChange(value);
             }}
-            value={value}
+            value={value || ''}
+            {...rest}
         />
     </Fragment>
 );

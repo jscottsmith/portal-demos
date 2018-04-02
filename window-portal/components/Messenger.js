@@ -2,19 +2,20 @@ import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 
 import MessageCreator from './MessageCreator';
-import Messages from './Messages';
+import SavedMessages from './SavedMessages';
 
 export default class Messenger extends Component {
     state = {
         messages: [],
     };
 
-    handleSave = ({ title, message }) => {
+    handleSave = ({ name, message }) => {
         const { messages } = this.state;
         const id = messages.length;
+        // set some defaults for lazy people
         const newMessage = {
-            title,
-            message,
+            name: name || 'Anonymous',
+            message: message || '¯\\_(ツ)_/¯',
             id,
         };
         const newMessages = [...messages, newMessage];
@@ -23,13 +24,13 @@ export default class Messenger extends Component {
 
     render() {
         const { messages } = this.state;
-        const hasSavedMessages = Boolean(messages.length);
+        const hasSavedMessages = !!messages.length;
         return (
             <article className="container">
                 <h1>Messenger 📝</h1>
                 <div className="form card">
-                    <Messages messages={messages} />
                     <MessageCreator handleSave={this.handleSave} />
+                    <SavedMessages messages={messages} />
                 </div>
             </article>
         );

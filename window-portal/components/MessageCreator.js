@@ -1,35 +1,43 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Input from './Input';
 
 class MessageCreator extends Component {
     state = {
-        title: '',
-        message: '',
+        name: null,
+        message: null,
     };
 
     render() {
-        const { message, title } = this.state;
+        const { message, name } = this.state;
         const { handleSave } = this.props;
         return (
-            <div className="input-container">
-                <Input label="Title" value={title} onChange={title => this.setState({ title })} />
+            <Fragment>
+                <Input
+                    label="Your Name"
+                    value={name}
+                    placeholder="Kenny Powers"
+                    onChange={name =>
+                        this.setState({
+                            name,
+                        })
+                    }
+                />
                 <Input
                     label="Your Message"
                     value={message}
+                    placeholder="Lorem ipsum"
                     onChange={message => this.setState({ message })}
+                    tag="textarea"
                 />
                 <button
                     className="btn"
                     onClick={() => {
-                        handleSave({ title, message });
-                        this.setState({
-                            title: '',
-                            message: '',
-                        });
+                        handleSave({ name, message });
+                        this.setState({ name: null, message: null });
                     }}>
                     Save Message
                 </button>
-            </div>
+            </Fragment>
         );
     }
 }

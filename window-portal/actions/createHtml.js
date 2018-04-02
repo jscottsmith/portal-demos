@@ -9,12 +9,20 @@ export async function createHtml(message) {
 // Fake API call that "uploads" markup to a server.
 // Really it just returns the markup here for us to use.
 
-function uploadMarkup({ title, message }) {
+function uploadMarkup({ name, message }) {
     return new Promise(resolve => {
         setTimeout(() => {
-            resolve(
-                `<!DOCTYPE html>\n<html>${createStyles()}\n<head>\n<title>${title}</title>\n</head>\n<body>\n<h1>${title}</h1>\n<p>${message}</p>\n</body>\n</html>`
-            );
+            resolve(`<!DOCTYPE html>
+                <html>
+                <head>
+                <title>${name}</title>
+                ${createStyles()}
+                </head>
+                <body>
+                    <h1>${name} says:</h1>
+                    <p>${message}</p>
+                </body>
+                </html>`);
         }, 2000);
     });
 }
@@ -23,7 +31,7 @@ function createStyles() {
     return `<style>
         html,
         body {
-            min-height: 100%;
+            height: 100%;
         }
 
         * {
@@ -31,15 +39,45 @@ function createStyles() {
         }
 
         h1 {
+            width: 100%;
             font-weight: 100;
         }
 
+        p {
+            width: 100%;
+            margin: 0;
+            line-height: 1;
+            font-size: 4vw;
+            font-weight: 700;
+            color: #222;
+        }
+
+        p:after,
+        p:before {
+            color: #222;
+        }
+
+        p:before {
+            content: '“';
+            margin-right: 0.2em;
+        }
+
+        p:after {
+            content: '”';
+            margin-left: 0.2em;
+        }
+
         body {
+            height: 100%;            
             position: relative;
             color: #222;
             background-image: linear-gradient(90deg, #fbff8c 0%, #ffeb8c 100%);
             text-align: center;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            align-content: center;
+            flex-flow: row wrap;
         }
     </style>`;
 }
