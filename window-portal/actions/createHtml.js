@@ -9,11 +9,11 @@ export async function createHtml(message) {
 // Fake API call that "uploads" markup to a server.
 // Really it just returns the markup here for us to use.
 
-function uploadMarkup(message) {
+function uploadMarkup({ title, message }) {
     return new Promise(resolve => {
         setTimeout(() => {
             resolve(
-                `<!DOCTYPE html>\n<html>${createStyles()}\n<head>\n<title>Message</title>\n</head>\n<body>\n<h1>Message</h1>\n<p>${message}</p>\n</body>\n</html>`
+                `<!DOCTYPE html>\n<html>${createStyles()}\n<head>\n<title>${title}</title>\n</head>\n<body>\n<h1>${title}</h1>\n<p>${message}</p>\n</body>\n</html>`
             );
         }, 2000);
     });
