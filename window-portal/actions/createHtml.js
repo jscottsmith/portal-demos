@@ -1,4 +1,4 @@
-export async function createHtml(message) {
+async function createHtml(message) {
     const markup = await uploadMarkup(message);
 
     return new Promise((resolve, reject) => {
@@ -81,3 +81,5 @@ function createStyles() {
         }
     </style>`;
 }
+
+export { createHtml };

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import MessageCreator from './MessageCreator';
 import SavedMessages from './SavedMessages';
 
-export default class Messenger extends Component {
+class Messenger extends Component {
     state = {
         messages: [],
     };
@@ -36,3 +36,5 @@ export default class Messenger extends Component {
         );
     }
 }
+
+export default Messenger;

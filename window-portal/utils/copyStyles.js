@@ -3,7 +3,7 @@
  * Inlcudes <link> styles sheets and <style> elements
  */
 
-export default function copyStyles(sourceDoc, targetDoc) {
+function copyStyles(sourceDoc, targetDoc) {
     Array.from(sourceDoc.styleSheets).forEach(styleSheet => {
         let hasRules = false;
         try {
@@ -32,3 +32,5 @@ export default function copyStyles(sourceDoc, targetDoc) {
         }
     });
 }
+
+export default copyStyles;
