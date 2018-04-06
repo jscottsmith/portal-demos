@@ -7,6 +7,7 @@ import SavedMessages from './SavedMessages';
 class Messenger extends Component {
     state = {
         messages: [],
+        usePortal: false,
     };
 
     handleSave = ({ name, message }) => {
@@ -23,15 +24,20 @@ class Messenger extends Component {
     };
 
     render() {
-        const { messages } = this.state;
+        const { messages, usePortal } = this.state;
         const hasSavedMessages = !!messages.length;
         return (
             <article className="container">
                 <h1>Messenger 📝</h1>
                 <div className="form card">
                     <MessageCreator handleSave={this.handleSave} />
-                    <SavedMessages messages={messages} />
+                    <SavedMessages messages={messages} usePortal={usePortal} />
                 </div>
+                <button
+                    className="portal-toggle btn"
+                    onClick={() => this.setState(({ usePortal }) => ({ usePortal: !usePortal }))}>
+                    {usePortal ? 'Disable Portal' : 'Activate Portal'}
+                </button>
             </article>
         );
     }

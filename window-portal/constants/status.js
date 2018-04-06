@@ -6,7 +6,8 @@ const types = {
 
 const messages = {
     UPDATING_MESSAGE: '⚠️ Creating your custom message. This will update once complete.',
-    STATUS_FAILED: '🚫 Oh no! Message is too short! Must be longer than 3 characters.',
+    STATUS_FAILED:
+        '🚫 Oh no! Looks like the link was blocked by a pop-up blocker. Activate portals to fix.',
     SUCCESS_MESSAGE: '✅ Your message was created successfully',
 };
 

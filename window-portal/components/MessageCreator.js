@@ -15,7 +15,7 @@ class MessageCreator extends Component {
                 <Input
                     label="Your Name"
                     value={name}
-                    placeholder="Kenny Powers"
+                    placeholder="Anonymous"
                     onChange={name =>
                         this.setState({
                             name,
@@ -41,4 +41,5 @@ class MessageCreator extends Component {
         );
     }
 }
+
 export default MessageCreator;

@@ -9,7 +9,7 @@ function copyStyles(sourceDoc, targetDoc) {
         try {
             hasRules = Boolean(styleSheet.cssRules);
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
 
         if (hasRules) {

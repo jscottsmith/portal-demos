@@ -171,7 +171,7 @@ textarea {
         background-color: #ffe08c;
     }
     &.error {
-        background-color: #f17151;
+        background-color: #f99e89;
     }
     &.success {
         background-color: #7eeb95;
@@ -205,6 +205,19 @@ $size: 10px;
             #8fd3f4 $size / 2,
             #8fd3f4 $size
         );
+    }
+}
+
+.portal-toggle {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    min-width: 140px;
+    margin-left: -70px;
+    &:hover {
+        color: #fff;
+        background-color: #42b6f4;
+        outline: none;
     }
 }
 
