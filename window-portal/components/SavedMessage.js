@@ -17,7 +17,8 @@ class SavedMessage extends Component {
     };
 
     componentWillReceiveProps({ usePortal }) {
-        if (usePortal !== this.props.usePortal) this.setState({ status: null });
+        if (usePortal !== this.props.usePortal)
+            this.setState({ status: null, isPortalOpen: false });
     }
 
     handleSubmit = id => {
